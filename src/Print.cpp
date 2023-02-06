@@ -364,7 +364,8 @@ static bool PrintToDevice(const PrintData& pd) {
     float px = (float)GetDeviceCaps(hdc, LOGPIXELSX);
     float py = (float)GetDeviceCaps(hdc, LOGPIXELSY);
     float dpiFactor = std::min(px / fileDPI, py / fileDPI);
-    bool bPrintPortrait = paperSize.dx < paperSize.dy;
+    // bool bPrintPortrait = paperSize.dx < paperSize.dy;
+    bool bPrintPortrait = true;
     if (devMode && (devMode->dmFields & DM_ORIENTATION)) {
         bPrintPortrait = DMORIENT_PORTRAIT == devMode->dmOrientation;
     }
@@ -476,7 +477,7 @@ static bool PrintToDevice(const PrintData& pd) {
                 std::swap(pSize.dx, pSize.dy);
             }
             // make sure not to print upside-down
-            rotation = (rotation % 180) == 0 ? 0 : 270;
+            // rotation = (rotation % 180) == 0 ? 0 : 270;
             // finally turn the page by (another) 90 deg in landscape mode
             if (!bPrintPortrait) {
                 rotation = (rotation + 90) % 360;
